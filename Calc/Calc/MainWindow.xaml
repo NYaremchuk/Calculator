@@ -47,12 +47,12 @@
         <Button Grid.Row="4" Grid.Column="3" x:Name="btn_minus" Click="btn_option_Click">-</Button>
         <Button Grid.Row="5" Grid.Column="3" x:Name="btn_plus" Click="btn_option_Click">+</Button>
         <Button Grid.Row="6" Grid.Column="3" x:Name="btn_equels" Click="btn_equals_Click">=</Button>
-        <Button Grid.Row="7" Grid.Column="0" x:Name="btn_plusMinus" Click="btn_option_Click">+/-</Button>
-        <Button Grid.Row="7" Grid.Column="2" x:Name="btn_comma" Click="btn_option_Click">,</Button>
+        <Button Grid.Row="7" Grid.Column="0" x:Name="btn_plusMinus" Click="btn_plusMinus_Click">+/-</Button>
+        <Button Grid.Row="7" Grid.Column="2" x:Name="btn_comma">,</Button>
 
-        <Button Grid.Row="2" Grid.Column="0" x:Name="btn_C" Click="btn_option_Click">С</Button>
-        <Button Grid.Row="2" Grid.Column="1" x:Name="btn_CE" Click="btn_option_Click">СE</Button>
-        <Button Grid.Row="2" Grid.Column="2" x:Name="btn_backspace" Content="&lt;--" Click="btn_option_Click"></Button>
+        <Button Grid.Row="2" Grid.Column="0" x:Name="btn_C" Click="btn_C_Click">С</Button>
+        <Button Grid.Row="2" Grid.Column="1" x:Name="btn_CE" Click="btn_CE_Click">CE</Button>
+        <Button Grid.Row="2" Grid.Column="2" x:Name="btn_backspace" Content="&lt;--" Click="btn_backspace_Click"></Button>
 
         <!--Text Box-->
         <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" x:Name="txtValue" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="40">0</TextBox>

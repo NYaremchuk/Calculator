@@ -20,7 +20,7 @@ namespace Calc
     /// </summary>
     public partial class MainWindow : Window
     {
-        int num1;
+        int num1 = 0;
         int num2;
         string op = "";
 
@@ -37,7 +37,7 @@ namespace Calc
             if (op == "")
             {
                 num1 = num1 * 10 + num;
-                txtValue.Text = num1.ToString();
+                txtValue.Text = num1.ToString(); 
             }
             else
             {
@@ -67,14 +67,55 @@ namespace Calc
                 case "max": result = Math.Max(num1, num2); break;
                 case "avg": result = (num1 + num2) / 2; break;
                 case "x^y": result = Convert.ToInt32(Math.Pow(num1, num2)); break;
-                //case ",": result = (int)Convert.ToDouble(num1); break;
-
-
             }
             txtValue.Text = result.ToString();
             op = "";
-
             num1 = result;
+        }
+
+        private void btn_C_Click(object sender, RoutedEventArgs e)
+        {
+            num1 = 0;
+            num2 = 0;
+            op = "";
+            txtValue.Text = "0";
+        }
+
+        private void btn_CE_Click(object sender, RoutedEventArgs e)
+        {
+            if (op == "")
+            {
+                num1 = 0; txtValue.Text = num1.ToString();
+            }
+            else
+            {
+                num2 = 0; txtValue.Text = num2.ToString();
+            }
+        }
+
+        private void btn_backspace_Click(object sender, RoutedEventArgs e)
+        {
+            if (op == "")
+            {
+                num1 = num1 / 10; txtValue.Text = num1.ToString();
+            }
+            else
+            {
+                num2 = num2 / 10; txtValue.Text = num2.ToString();
+            }
+
+        }
+
+        private void btn_plusMinus_Click(object sender, RoutedEventArgs e)
+        {
+            if (op == "")
+            {
+                num1 *= -1; txtValue.Text = num1.ToString();
+            }
+            else
+            {
+                num2 *= -1; txtValue.Text = num2.ToString();
+            }
         }
     }
 }
