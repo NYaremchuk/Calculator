@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Calc
 {
@@ -20,8 +9,8 @@ namespace Calc
     /// </summary>
     public partial class MainWindow : Window
     {
-        int num1 = 0;
-        int num2;
+        double num1 = 0;
+        double num2 = 0;
         string op = "";
 
         public MainWindow()
@@ -29,34 +18,35 @@ namespace Calc
             InitializeComponent();
         }
 
-        private void btn_num_Click(object sender, RoutedEventArgs e)
+        private void Btn_num_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            string str = button.Content.ToString();
-            int num = Int32.Parse(str);
+            string num = button.Content.ToString();
+            if (txtValue.Text == "0")
+                txtValue.Text = num;
+            else if (op == "")
+                
+                txtValue.Text += num;
+
             if (op == "")
-            {
-                num1 = num1 * 10 + num;
-                txtValue.Text = num1.ToString(); 
-            }
+                num1 = double.Parse(txtValue.Text);
             else
             {
-                num2 = num2 * 10 + num;
+                num2 = double.Parse(num);
                 txtValue.Text = num2.ToString();
             }
-
         }
 
-        private void btn_option_Click(object sender, RoutedEventArgs e)
+        private void Btn_operation_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             op = button.Content.ToString();
             txtValue.Text = op;
         }
 
-        private void btn_equals_Click(object sender, RoutedEventArgs e)
+        private void Btn_equals_Click(object sender, RoutedEventArgs e)
         {
-            int result = 0;
+            double result = 0;
             switch (op)
             {
                 case "+": result = num1 + num2; break;
@@ -68,12 +58,13 @@ namespace Calc
                 case "avg": result = (num1 + num2) / 2; break;
                 case "x^y": result = Convert.ToInt32(Math.Pow(num1, num2)); break;
             }
-            txtValue.Text = result.ToString();
+            txtValue.Text = Math.Round(result, 3).ToString();
             op = "";
             num1 = result;
+            num2 = 0;
         }
 
-        private void btn_C_Click(object sender, RoutedEventArgs e)
+        private void Btn_C_Click(object sender, RoutedEventArgs e)
         {
             num1 = 0;
             num2 = 0;
@@ -81,7 +72,7 @@ namespace Calc
             txtValue.Text = "0";
         }
 
-        private void btn_CE_Click(object sender, RoutedEventArgs e)
+        private void Btn_CE_Click(object sender, RoutedEventArgs e)
         {
             if (op == "")
             {
@@ -93,29 +84,36 @@ namespace Calc
             }
         }
 
-        private void btn_backspace_Click(object sender, RoutedEventArgs e)
+        private void Btn_backspace_Click(object sender, RoutedEventArgs e)
         {
-            if (op == "")
-            {
-                num1 = num1 / 10; txtValue.Text = num1.ToString();
-            }
-            else
-            {
-                num2 = num2 / 10; txtValue.Text = num2.ToString();
-            }
+            if (txtValue.Text.Length == 1) txtValue.Text = "0";
 
+            else
+                txtValue.Text = txtValue.Text.Remove(txtValue.Text.Length - 1, 1);
+
+            if (txtValue.Text[txtValue.Text.Length - 1] == ',')
+                txtValue.Text = txtValue.Text.Remove(txtValue.Text.Length - 1, 1);
         }
 
-        private void btn_plusMinus_Click(object sender, RoutedEventArgs e)
+        private void Btn_plusMinus_Click(object sender, RoutedEventArgs e)
         {
             if (op == "")
             {
-                num1 *= -1; txtValue.Text = num1.ToString();
+                num1 *= -1;
+                txtValue.Text = num1.ToString();
             }
             else
             {
-                num2 *= -1; txtValue.Text = num2.ToString();
+                num2 *= -1;
+                txtValue.Text = num2.ToString();
             }
+        }
+
+        private void Btn_comma_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtValue.Text.Contains(','))
+                return;
+            txtValue.Text += ',';
         }
     }
 }
