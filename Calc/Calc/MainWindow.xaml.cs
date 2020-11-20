@@ -4,9 +4,6 @@ using System.Windows.Controls;
 
 namespace Calc
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         double num1 = 0;
@@ -22,17 +19,22 @@ namespace Calc
         {
             Button button = (Button)sender;
             string num = button.Content.ToString();
-            if (txtValue.Text == "0")
-                txtValue.Text = num;
-            else if (op == "")
-                
-                txtValue.Text += num;
-
+            
             if (op == "")
+            {
+                if (txtValue.Text == "0")
+                    txtValue.Text = num;
+                else
+                    txtValue.Text += num;
                 num1 = double.Parse(txtValue.Text);
+            }
             else
             {
-                num2 = double.Parse(num);
+                if (txtValue.Text == op)
+                    txtValue.Text = num;
+                else
+                    txtValue.Text += num;
+                num2 = double.Parse(txtValue.Text);
                 txtValue.Text = num2.ToString();
             }
         }
@@ -93,6 +95,10 @@ namespace Calc
 
             if (txtValue.Text[txtValue.Text.Length - 1] == ',')
                 txtValue.Text = txtValue.Text.Remove(txtValue.Text.Length - 1, 1);
+            if (op == "")
+                num1 = double.Parse(txtValue.Text);
+            else
+                num2 = double.Parse(txtValue.Text);
         }
 
         private void Btn_plusMinus_Click(object sender, RoutedEventArgs e)
@@ -111,7 +117,7 @@ namespace Calc
 
         private void Btn_comma_Click(object sender, RoutedEventArgs e)
         {
-            if (txtValue.Text.Contains(','))
+            if (txtValue.Text.Contains(","))
                 return;
             txtValue.Text += ',';
         }
